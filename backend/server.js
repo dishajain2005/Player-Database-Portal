@@ -18,7 +18,7 @@ app.get('/api/players', async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: 'Sheet1!A:E', // Adjust range as needed: Name, Sport, Hostel, Achievements, Level
+      range: 'Sheet1!A:F', // Adjust range as needed: Name, Sport, Hostel, Achievements, Level, Gender
       key: API_KEY
     });
 
@@ -33,7 +33,8 @@ app.get('/api/players', async (req, res) => {
       sport: row[1] || '',
       hostel: row[2] || '',
       achievements: row[3] || '',
-      level: row[4] || ''
+      level: row[4] || '',
+      gender: row[5] || ''
     }));
 
     res.json(players);

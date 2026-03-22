@@ -7,6 +7,7 @@ function App() {
   const [sportFilter, setSportFilter] = useState('');
   const [hostelFilter, setHostelFilter] = useState('');
   const [levelFilter, setLevelFilter] = useState('');
+  const [genderFilter, setGenderFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
 
   useEffect(() => {
@@ -44,6 +45,10 @@ function App() {
       filtered = filtered.filter(player => player.level === levelFilter);
     }
 
+    if (genderFilter) {
+      filtered = filtered.filter(player => player.gender === genderFilter);
+    }
+
     if (sortBy) {
       filtered.sort((a, b) => {
         if (sortBy === 'name') return a.name.localeCompare(b.name);
@@ -54,16 +59,17 @@ function App() {
     }
 
     setFilteredPlayers(filtered);
-  }, [players, searchTerm, sportFilter, hostelFilter, levelFilter, sortBy]);
+  }, [players, searchTerm, sportFilter, hostelFilter, levelFilter, genderFilter, sortBy]);
 
   const uniqueSports = [...new Set(players.map(p => p.sport))];
   const uniqueHostels = [...new Set(players.map(p => p.hostel))];
   const uniqueLevels = [...new Set(players.map(p => p.level))];
+  const uniqueGenders = [...new Set(players.map(p => p.gender))];
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h1>Player Database Portal</h1>
-      <div>
+      <div className="filter-section">
         <input
           type="text"
           placeholder="Search by name or sport"
@@ -82,6 +88,10 @@ function App() {
           <option value="">All Levels</option>
           {uniqueLevels.map(level => <option key={level} value={level}>{level}</option>)}
         </select>
+        <select value={genderFilter} onChange={(e) => setGenderFilter(e.target.value)}>
+          <option value="">All Genders</option>
+          {uniqueGenders.map(gender => <option key={gender} value={gender}>{gender}</option>)}
+        </select>
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
           <option value="">No Sort</option>
           <option value="name">Sort by Name</option>
@@ -89,23 +99,30 @@ function App() {
           <option value="level">Sort by Level</option>
         </select>
       </div>
-      <table border="1" style={{ marginTop: '20px', width: '100%' }}>
+      <p className="entry-count">
+        Total Entries: {filteredPlayers.length}
+      </p>
+      <table>
         <thead>
           <tr>
+            <th>S.No</th>
             <th>Name</th>
             <th>Sport</th>
             <th>Hostel</th>
             <th>Achievements</th>
+            <th>Gender</th>
             <th>Level</th>
           </tr>
         </thead>
         <tbody>
           {filteredPlayers.map((player, index) => (
             <tr key={index}>
+              <td>{index + 1}</td>
               <td>{player.name}</td>
               <td>{player.sport}</td>
               <td>{player.hostel}</td>
               <td>{player.achievements}</td>
+              <td>{player.gender}</td>
               <td>{player.level}</td>
             </tr>
           ))}
