@@ -75,7 +75,8 @@ A React frontend application that dynamically reflects data from a Google Sheet,
    - B: Sport
    - C: Hostel
    - D: Achievements
-   - E: Level
+   - E: Gender
+   - F: Level
 
 2. Make the sheet public (Share > Anyone with the link can view).
 
