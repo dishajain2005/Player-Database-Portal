@@ -5,8 +5,8 @@ A React frontend application that dynamically reflects data from a Google Sheet,
 ## Features
 
 - **Google Sheets Integration**: Automatically syncs data from a Google Sheet.
-- **Player Data Display**: Shows Name, Sport, Hostel, Achievements, and Level.
-- **Search and Filtering**: Search by name or sport, filter by sport, hostel, or level.
+- **Player Data Display**: Shows Name, Sport, Hostel, Achievements, Gender and Level.
+- **Search and Filtering**: Search by name or sport, filter by sport, hostel, Gender or level.
 - **Sorting**: Sort players by name, sport, or level.
 - **Real-time Updates**: Polls the backend every 10 seconds for updates.
 
